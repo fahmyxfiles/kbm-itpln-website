@@ -1,0 +1,107 @@
+<%
+pad = function(n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}
+getDateWithArrayFormatShortedMonth = function(date) {
+  var monthNames = [
+    "Jan", "Feb", "Mar",
+    "Apr", "Mei", "Jun", "Jul",
+    "Agust", "Sept", "Okt",
+    "Nov", "Des"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return [pad(day,2), monthNames[monthIndex], year];
+}
+getDateWithArrayFormat = function(date) {
+  var monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return [pad(day,2), monthNames[monthIndex], year];
+}
+formatDateWithoutYearMonth = function(date) {
+  var monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return pad(day,2) + ' ' + monthNames[monthIndex];
+}
+formatDateWithoutYear = function(date) {
+  var monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return pad(day,2) + ' ' + monthNames[monthIndex];
+}
+formatDate = function(date) {
+  var monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+
+  return pad(day,2) + ' ' + monthNames[monthIndex] + ' ' + year;
+}
+formatDateWithTime = function(date) {
+  var monthNames = [
+    "Januari", "Februari", "Maret",
+    "April", "Mei", "Juni", "Juli",
+    "Agustus", "September", "Oktober",
+    "November", "Desember"
+  ];
+
+  var day = date.getDate();
+  var monthIndex = date.getMonth();
+  var year = date.getFullYear();
+  
+  var h = pad(date.getHours(), 2);
+  var m = pad(date.getMinutes(), 2);
+  var s = pad(date.getSeconds(), 2);
+
+  return pad(day,2) + ' ' + monthNames[monthIndex] + ' ' + year + ' ' + h + ':' + m + ':' + s;
+}
+formatRupiah = function(bilangan){
+	var	number_string = bilangan.toString(),
+		sisa 	= number_string.length % 3,
+		rupiah 	= number_string.substr(0, sisa),
+		ribuan 	= number_string.substr(sisa).match(/\d{3}/g);
+			
+	if (ribuan) {
+		separator = sisa ? '.' : '';
+		rupiah += separator + ribuan.join('.');
+	}
+	return "Rp. " + rupiah;
+}
+%>

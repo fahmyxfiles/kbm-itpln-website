@@ -1,0 +1,54 @@
+<!-- Header -->
+<header class="header">
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<div class="header_content d-flex flex-row align-items-center justify-content-start">
+					<div class="logo" style="max-width: 300px;"><img style="max-width:30%" class="img-fluid" src="images/logo/sitelogo.png"/>&nbsp;<a href="#">BEM-KBM STT-PLN</a></div>
+					<nav class="main_nav">
+						<ul>
+							<li><a href="/Web/">Beranda</a></li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  Kabinet
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/Web/Cabinet/Structure">Struktur Kabinet</a>
+								  <a class="dropdown-item" href="/Web/Cabinet/WorkProgram">Program Kerja</a>
+								</div>
+							</li>
+							<li class="nav-item dropdown">
+								<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								  Informasi
+								</a>
+								<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+								  <a class="dropdown-item" href="/Web/Info/DSA">Himpunan Mahasiswa Jurusan</a>
+								  <a class="dropdown-item" href="/Web/Info/RSA">Himpunan Mahasiswa Daerah</a>
+								  <div class="dropdown-divider"></div>
+								  <a class="dropdown-item" href="/Web/Info/AU">Badan Otonom</a>
+								  <a class="dropdown-item" href="/Web/Info/SAU">Badan Semi Otonom</a>
+								  <div class="dropdown-divider"></div>
+								  <a class="dropdown-item" href="/Web/Info/SO">Ormawa</a>
+								</div>
+							</li>
+							<li><a href="/Web/News">Berita</a></li>
+							<li><a href="/Web/Events">Event</a></li>
+						</ul>
+					</nav>
+					<div class="search_container ml-auto">
+						<form action="#">
+							<input type="search" class="header_search_input" required="required" placeholder="Ketik yang ingin dicari...">
+							<img class="header_search_icon" src="images/search.png" alt="">
+						</form>
+						
+					</div>
+					<div class="hamburger ml-auto menu_mm">
+						<i class="fa fa-bars trans_200 menu_mm" aria-hidden="true"></i>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</header>
+
+<% include Menu.ejs %> 

@@ -1,0 +1,469 @@
+<% include Functions.ejs %> 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>BEM KBM STT-PLN Jakarta | Beranda</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="Demo project">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="styles/bootstrap4/bootstrap.min.css">
+<link href="plugins/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/owl.theme.default.css">
+<link rel="stylesheet" type="text/css" href="plugins/OwlCarousel2-2.2.1/animate.css">
+<link rel="stylesheet" type="text/css" href="plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.css">
+<link rel="stylesheet" type="text/css" href="styles/main_styles.css">
+<link rel="stylesheet" type="text/css" href="styles/responsive.css">
+</head>
+<body>
+
+<div class="super_container">
+	<% include Partials/Header_NonParallax.ejs %> 
+	<!-- Home -->
+	<div class="home">
+		
+		<!-- Home Slider -->
+
+		<div class="home_slider_container" style="padding-top:106px;background: #ffffff;">
+			<div class="owl-carousel owl-theme home_slider">
+				<%
+				for(i = 0; i < HighLightNewsEventList.length; i++){
+				%>
+					<!-- Slider Item -->
+					<div class="owl-item">
+						<img class="home_slider_image_container" src="<%= HighLightNewsEventList[i].ImagePath %>">
+						<div class="home_slider_content_container">
+							<div class="container">
+								<div class="row">
+									<div class="col">
+										<div class="home_slider_content">
+											<% 
+											if(HighLightNewsEventList[i].Type == "News"){
+												const Category = CategoryList.find( Category => Category.id == HighLightNewsEventList[i].CategoryId );
+												if(Category){
+													%>
+													<div class="home_slider_item_category trans_200"><a href="<%= HighLightNewsEventList[i].Type %>/<%= Category.Alias %>" class="trans_200"><%= Category.Name %></a></div>
+													<% 
+												}
+											}
+											%>
+											<div class="home_slider_item_title">
+												<a href="<%= HighLightNewsEventList[i].Type %>/<%= HighLightNewsEventList[i].Url %>"><%= HighLightNewsEventList[i].Title %></a>
+											</div>
+											<div class="home_slider_item_link">
+												<a href="<%= HighLightNewsEventList[i].Type %>/<%= HighLightNewsEventList[i].Url %>" class="trans_200">Baca Selengkapnya
+													<svg version="1.1" id="link_arrow_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+														 width="19px" height="13px" viewBox="0 0 19 13" enable-background="new 0 0 19 13" xml:space="preserve">
+														<polygon fill="#FFFFFF" points="12.475,0 11.061,0 17.081,6.021 0,6.021 0,7.021 17.038,7.021 11.06,13 12.474,13 18.974,6.5 "/>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				<%
+				}
+				%>
+			</div>
+
+			<div class="custom_nav_container home_slider_nav_container">
+				<div class="custom_prev custom_prev_home_slider">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+						<polyline fill="#FFFFFF" points="0,5.61 5.609,0 7,0 7,1.438 2.438,6 7,10.563 7,12 5.609,12 -0.002,6.39 "/>
+					</svg>
+				</div>
+		        <ul id="custom_dots" class="custom_dots custom_dots_home_slider">
+					<li class="custom_dot custom_dot_home_slider active"><span></span></li>
+					<li class="custom_dot custom_dot_home_slider"><span></span></li>
+					<li class="custom_dot custom_dot_home_slider"><span></span></li>
+				</ul>
+				<div class="custom_next custom_next_home_slider">
+					<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+						 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+						<polyline fill="#FFFFFF" points="6.998,6.39 1.389,12 -0.002,12 -0.002,10.562 4.561,6 -0.002,1.438 -0.002,0 1.389,0 7,5.61 "/>
+					</svg>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	
+	<!-- Page Content -->
+
+	<div class="page_content">
+		<div class="container">
+			<div class="row row-lg-eq-height">
+
+				<!-- Main Content -->
+
+				<div class="col-lg-9">
+					<div class="main_content">
+
+						<!-- Blog Section - Berita Terbaru -->
+
+						<div class="blog_section">
+							<div class="section_panel d-flex flex-row align-items-center justify-content-start">
+								<div class="section_title">Berita Terbaru</div>
+								<div class="section_tags ml-auto">
+									<ul id="ulNewsCategorySwitcher">
+										<li class="active"><a class="newsCategorySwitcher selected" href="#!" category-data="">Semua</a></li>
+										<%for(i = 0; i < CategoryList.length; i++){
+										if( i >= 4 ) break;
+										%>
+										<li><a href="#!" class="newsCategorySwitcher" category-data="<%= CategoryList[i].Alias %>"><%= CategoryList[i].Name %></a></li>
+										<%}%>
+									</ul>
+								</div>
+								<% if(CategoryList.length > 4){ %> 
+								<div class="section_panel_more">
+									<ul>
+										<li>lainnya
+											<ul id="ulNewsCategorySwitcherMore">
+												<%for(i = 4; i < CategoryList.length; i++){
+												%>
+												<li><a href="#!" class="newsCategorySwitcher" category-data="<%= CategoryList[i].Alias %>"><%= CategoryList[i].Name %></a></li>
+												<%}%>
+											</ul>
+										</li>
+									</ul>
+								</div>
+								<%}%>
+							</div>
+							<div class="section_content">
+								<div class="clearfix" id="newsListContainer">
+								</div>
+							</div>
+							<div class="load_more">
+								<div id="news_load_more" class="load_more_button text-center trans_200">Lainnya</div>
+							</div>
+						</div>
+						<!-- Blog Section - Event Terbaru -->
+
+						<div class="blog_section">
+							<div class="section_panel d-flex flex-row align-items-center justify-content-start">
+								<div class="section_title">Event Terbaru</div>
+							</div>
+							<div class="section_content">
+								<div class="clearfix" id="eventListContainer">
+								</div>
+							</div>
+							<div class="load_more">
+								<div id="events_load_more" class="load_more_button text-center trans_200">Lainnya</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Sidebar -->
+
+				<div class="col-lg-3">
+					<div class="sidebar">
+						<div class="sidebar_background"></div>
+						<!-- Top Stories -->
+						<% if(TopNewsList.length > 0){ %>
+						<div class="sidebar_section">
+							<div class="sidebar_title_container">
+								<div class="sidebar_title">Berita Terpopuler</div>
+								<div class="sidebar_slider_nav">
+									<div class="custom_nav_container sidebar_slider_nav_container">
+										<div class="custom_prev custom_prev_top">
+											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+												<polyline fill="#bebebe" points="0,5.61 5.609,0 7,0 7,1.438 2.438,6 7,10.563 7,12 5.609,12 -0.002,6.39 "/>
+											</svg>
+										</div>
+								        <ul id="custom_dots" class="custom_dots custom_dots_top">
+											<li class="custom_dot custom_dot_top active"><span></span></li>
+											<li class="custom_dot custom_dot_top"><span></span></li>
+											<li class="custom_dot custom_dot_top"><span></span></li>
+										</ul>
+										<div class="custom_next custom_next_top">
+											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+												<polyline fill="#bebebe" points="6.998,6.39 1.389,12 -0.002,12 -0.002,10.562 4.561,6 -0.002,1.438 -0.002,0 1.389,0 7,5.61 "/>
+											</svg>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="sidebar_section_content">
+								<!-- Top News Slider -->
+								<div class="sidebar_slider_container">
+									<div class="owl-carousel owl-theme sidebar_slider_top">
+										<%
+										var TopNewsData = [];
+										while (TopNewsList.length > 0)
+											TopNewsData.push(TopNewsList.splice(0, 6));
+										
+										for(a = 0; a < TopNewsData.length; a++){
+										%>
+											<!-- Top Stories Slider Item -->
+											<div class="owl-item">
+										<%
+											for(b = 0; b < TopNewsData[a].length; b++){
+												var CurrentNewsItems = TopNewsData[a][b];
+												%>
+													<!-- Sidebar Post -->
+													<div class="side_post">
+														<a href="/Web/News/<%=CurrentNewsItems.Url%>">
+															<div class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
+																<div class="side_post_image"><div><img src="<%=CurrentNewsItems.ImagePath%>" alt=""></div></div>
+																<div class="side_post_content">
+																	<div class="side_post_title" style="line-height: 1.5em;height: 3em;overflow: hidden;"><%=CurrentNewsItems.Title%></div>
+																	<small class="post_meta"><%=formatDate(CurrentNewsItems.CreatedDateTime)%></small>
+																</div>
+															</div>
+														</a>
+													</div>
+												<%
+											}
+										%>
+											</div>
+										<%
+										}
+										%>
+									</div>
+								</div>
+							</div>
+						</div>
+						<% } %>
+						
+						<!-- Advertising 
+
+						<div class="sidebar_section">
+							<div class="advertising">
+								<div class="advertising_background" style="background-image:url(images/post_17.jpg)"></div>
+								<div class="advertising_content d-flex flex-column align-items-start justify-content-end">
+									<div class="advertising_perc">-15%</div>
+									<div class="advertising_link"><a href="#">How Did van Gogh’s Turbulent Mind</a></div>
+								</div>
+							</div>
+						</div>
+						
+						-->
+						<!-- Future Events -->
+
+						<div class="sidebar_section future_events">
+							<div class="sidebar_title_container">
+								<div class="sidebar_title">Event Terdekat</div>
+								<% if(UpcomingEventList.length > 0){ %>
+								<div class="sidebar_slider_nav">
+									<div class="custom_nav_container sidebar_slider_nav_container">
+										<div class="custom_prev custom_prev_events">
+											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+												<polyline fill="#bebebe" points="0,5.61 5.609,0 7,0 7,1.438 2.438,6 7,10.563 7,12 5.609,12 -0.002,6.39 "/>
+											</svg>
+										</div>
+								        <ul id="custom_dots" class="custom_dots custom_dots_events">
+											<li class="custom_dot custom_dot_events active"><span></span></li>
+											<li class="custom_dot custom_dot_events"><span></span></li>
+											<li class="custom_dot custom_dot_events"><span></span></li>
+										</ul>
+										<div class="custom_next custom_next_events">
+											<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+												 width="7px" height="12px" viewBox="0 0 7 12" enable-background="new 0 0 7 12" xml:space="preserve">
+												<polyline fill="#bebebe" points="6.998,6.39 1.389,12 -0.002,12 -0.002,10.562 4.561,6 -0.002,1.438 -0.002,0 1.389,0 7,5.61 "/>
+											</svg>
+										</div>
+									</div>
+								</div>
+								<% } %>
+							</div>
+							
+							<% if(UpcomingEventList.length > 0){ %>
+							<div class="sidebar_section_content">
+								<!-- Sidebar Slider -->
+								<div class="sidebar_slider_container">
+									<div class="owl-carousel owl-theme sidebar_slider_events">
+
+										<%
+										var UpcomingEventsData = [];
+										while (UpcomingEventList.length > 0)
+											UpcomingEventsData.push(UpcomingEventList.splice(0, 6));
+										
+										for(a = 0; a < UpcomingEventsData.length; a++){
+										%>
+											<!-- Top Stories Slider Item -->
+											<div class="owl-item">
+										<%
+											for(b = 0; b < UpcomingEventsData[a].length; b++){
+												var CurrentEventsItems = UpcomingEventsData[a][b];
+												var eventDate = getDateWithArrayFormatShortedMonth(new Date(CurrentEventsItems.StartDateTime));
+												%>
+													<!-- Sidebar Post -->
+													<div class="side_post">
+														<a href="/Web/Events/<%=CurrentEventsItems.Url%>">
+															<div class="d-flex flex-row align-items-xl-center align-items-start justify-content-start">
+																<div class="event_date d-flex flex-column align-items-center justify-content-center">
+																	<div class="event_day"><%=eventDate[0]%></div>
+																	<div class="event_month"><%=eventDate[1]%></div>
+																</div>
+																<div class="side_post_content">
+																	<div class="side_post_title" style="line-height: 1.5em;height: 3em;overflow: hidden;"><%=CurrentEventsItems.Title%></div>
+																</div>
+															</div>
+														</a>
+													</div>
+												<%
+											}
+										%>
+											</div>
+										<%
+										}
+										%>
+
+									</div>
+								</div>
+							</div>
+							<% } else { %>
+								<small>Tidak ada event dalam waktu dekat.</small>
+							<% }%>						
+						</div>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<% include Partials/Footer %> 
+</div>
+
+<script src="js/jquery-3.2.1.min.js"></script>
+<script src="styles/bootstrap4/popper.js"></script>
+<script src="styles/bootstrap4/bootstrap.min.js"></script>
+<script src="plugins/OwlCarousel2-2.2.1/owl.carousel.js"></script>
+<script src="plugins/jquery.mb.YTPlayer-3.1.12/jquery.mb.YTPlayer.js"></script>
+<script src="plugins/easing/easing.js"></script>
+<script src="plugins/masonry/masonry.js"></script>
+<script src="plugins/masonry/images_loaded.js"></script>
+<script src="js/custom.js"></script>
+<script type="text/javascript">
+var currentNewsLimit = 0;
+var currentEventsLimit = 0;
+function fetchNewsList(nLimit){
+	// Fire off the request to /form.php
+	var selectedCategory = $('a.newsCategorySwitcher.selected').attr('category-data');
+    var request = $.ajax({
+        url: "/Web/News/getData",
+        type: "post",
+        data: "nLimit=" + (currentNewsLimit+nLimit) + "&category="+selectedCategory
+    });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+		var NewsData = JSON.parse(response);
+		if(NewsData.length > 0){
+			var c = 0;
+			var ContentData = "<div class=\"align-items-center flex-row\">";
+			for(i = currentNewsLimit; i < NewsData.length; i++){
+				var CurrentNews = NewsData[i];
+				ContentData += "<div class=\"card card_small_with_image grid-item\"><img class=\"card-img-top\" src=\"" + CurrentNews.ImagePath + "\" alt=\"\"><div class=\"card-body\"><div class=\"card-title card-title-small\" style=\"line-height: 1.5em;height: 3em;overflow: hidden;\"><a href=\"News/" + CurrentNews.Url + "\">" + CurrentNews.Title + "</a></div><small class=\"post_meta\"><a href=\"#\">" + CurrentNews.AuthorName + "</a><br>"+formatDateWithTime(new Date(CurrentNews.CreatedDateTime))+"</small></div></div>";
+				if((c+1) % 3 == 0){
+					ContentData += "</div>";
+					if((i+1) < NewsData.length){
+						ContentData += "<div class=\"align-items-center flex-row\">";
+					}
+				}
+				c++;
+			}
+			if((currentNewsLimit + nLimit) > NewsData.length){
+				// Konten habis
+				$("#news_load_more").hide();
+			}
+			$('#newsListContainer').append(ContentData);
+			currentNewsLimit += nLimit;
+		}
+		else
+		{
+			$("#news_load_more").hide();
+		}
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+}
+
+function fetchEventList(nLimit){
+	// Fire off the request to /form.php
+    var request = $.ajax({
+        url: "/Web/Events/getData",
+        type: "post",
+        data: "nLimit=" + (currentEventsLimit+nLimit)
+    });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+		var EventData = JSON.parse(response);
+		if(EventData.length > 0){
+			var c = 0;
+			var ContentData = "<div class=\"align-items-center flex-row\">";
+			for(i = currentEventsLimit; i < EventData.length; i++){
+				var CurrentEvent = EventData[i];
+				ContentData += "<div class=\"card card_small_with_image grid-item\" style=\"margin-top: 10px;margin-left: 10px;margin-bottom: 10px;\"><img class=\"card-img-top\" src=\"" + CurrentEvent.ImagePath + "\" alt=\"\"><div class=\"card-body\"><div class=\"card-title card-title-small\" style=\"line-height: 1.5em;height: 3em;overflow: hidden;\"><a href=\"Events/" + CurrentEvent.Url + "\">" + CurrentEvent.Title + "</a></div><small class=\"post_meta\"><a href=\"#\">" + CurrentEvent.AuthorName + "</a><br>"+formatDateWithTime(new Date(CurrentEvent.CreatedDateTime))+"</small></div></div>";
+				if((c+1) % 3 == 0){
+					ContentData += "</div>";
+					if((i+1) < EventData.length){
+						ContentData += "<div class=\"align-items-center flex-row\">";
+					}
+				}
+				c++;
+			}
+			if((currentEventsLimit + nLimit) > EventData.length){
+				// Konten habis
+				$("#events_load_more").hide();
+			}
+			$('#eventListContainer').append(ContentData);
+			currentEventsLimit += nLimit;
+		}
+		else
+		{
+			$("#events_load_more").hide();
+		}
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+}
+$(document).ready(function(){
+	fetchNewsList(6);
+	fetchEventList(6);
+});
+$(".newsCategorySwitcher").click(function(){
+	$('#ulNewsCategorySwitcher li.active').removeClass('active');
+	$('#ulNewsCategorySwitcherMore li.active').removeClass('active');
+	$('a.newsCategorySwitcher.selected').removeClass('selected');
+	$(this).parent().addClass("active");
+	$(this).addClass("selected");
+	$('#newsListContainer').html("");
+	currentNewsLimit = 0;
+	fetchNewsList(6);
+});
+$("#news_load_more").click(function(){
+	fetchNewsList(6);
+});
+$("#events_load_more").click(function(){
+	fetchEventList(6);
+});
+</script>
+</body>
+</html>
